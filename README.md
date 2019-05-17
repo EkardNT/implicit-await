@@ -2,6 +2,8 @@
 
 ## Usage
 
+A **nightly** Rust compiler is required until the [async_await](https://github.com/rust-lang/rust/issues/50547) feature is stabilized.
+
 Add this to your `Cargo.toml`:
 
 ```toml
@@ -124,6 +126,12 @@ The catch is that Rust doesn't support negative or mutually exclusive trait boun
 ## Features
 
 * `std` (*default-feature*) - Enable support for Rust's standard library types. Disable this feature for `no-std` support.
+
+## TODOs
+
+* Fix bug in the as_future! macro which makes multi-generic invocations not work.
+* Go through all of `std` adding types
+* Come up with a list of other crates to add support for, and do so.
 
 ## Acknowledgements
 
