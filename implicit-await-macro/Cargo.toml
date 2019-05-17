@@ -1,0 +1,22 @@
+[package]
+name = "implicit-await-macro"
+version = "0.1.0"
+authors = ["Drake Tetreault <ekardnt@ekardnt.com>"]
+edition = "2018"
+license = "CC0-1.0"
+homepage = "https://github.com/EkardNT/implicit-await"
+repository = "https://github.com/EkardNT/implicit-await"
+readme = "README.md"
+keywords = ["async", "await", "implicit"]
+categories = ["asynchronous", "concurrency", "no-std"]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+quote = "0.6"
+proc-macro2 = "0.4"
+
+[dependencies.syn]
+version = "0.15"
+features = ["full", "fold", "extra-traits"]
