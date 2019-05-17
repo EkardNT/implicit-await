@@ -7,7 +7,7 @@ use futures::future::{join, ready, FutureExt};
 use futures::executor::ThreadPool;
 
 fn main() {
-    ThreadPool::new().unwrap().run(test().inspect(|sum| match sum {
+    ThreadPool::new().unwrap().run(sum().inspect(|sum| match sum {
         Ok(sum) => println!("The sum is {}", sum),
         Err(_) => println!("Summation failed")
     })).unwrap();
@@ -16,7 +16,7 @@ fn main() {
 type IntResult = Result<u32, ()>;
 
 #[implicit_await]
-async fn test() -> IntResult {
+async fn sum() -> IntResult {
     // Call a synchronous function.
     let one: u32 = num_sync(1)?;
     // Call a synchronous function that returns an impl Future.
