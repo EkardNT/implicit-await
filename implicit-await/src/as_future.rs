@@ -35,12 +35,14 @@ pub fn ready<T>(t: T) -> Ready<T> {
     Ready(Some(t))
 }
 
+#[cfg(feature = "std")]
 impl<T, E> NonFutureAsFuture for Result<T, E> {
     fn as_future(self) -> Ready<Self> {
         ready(self)
     }
 }
 
+#[cfg(feature = "std")]
 as_future_internal!{
     String,
     &str,
@@ -57,4 +59,5 @@ as_future_internal!{
     i128,
     usize,
     isize,
-    std::io::BufReader<T>}
+    std::io::BufReader<T>,
+    std::option::Option<T>}

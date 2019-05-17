@@ -88,7 +88,7 @@ async fn sum() -> IntResult {
 }
 ```
 
-`implicit-await` makes calls to asynchronous functions behave identically to calls to synchronous functions from the point of view of program control flow. The intuitive rule that functions complete before they return, which Rust programmers naturally learn from calling synchronous functions, also applies to asynchronous function calls. However, sometimes you have use-cases where you want explicit control over suspension points. The `defer!` macro allows you to *defer* awaits so that you can start multiple asynchronous processes in parallel. A common example of this use case is making multiple network requests at the same time, then waiting for all of them to complete.
+`implicit-await` makes calls to asynchronous functions behave identically to calls to synchronous functions from the point of view of program control flow. The intuitive rule that *functions complete before they return*, which Rust programmers naturally learn from calling synchronous functions, also applies to asynchronous function calls. However, sometimes you have use-cases where you want explicit control over suspension points. The `defer!` macro allows you to *defer* awaits so that you can start multiple asynchronous processes in parallel. A common example of this use case is making multiple network requests at the same time, then waiting for all of them to complete.
 
 ```rust
 use implicit_await::defer;
@@ -111,13 +111,15 @@ async fn sum() -> IntResult {
 
 ## What's the catch?
 
-The catch is that Rust doesn't support negative or mutually exclusive trait bounds. Because of this, I needed to make a choice whether to seamlessly support `Future` types seamlessly and `!Future` types manually, or `!Future` types seamlessly and `Future` types manually. I chose the former. This means that types which do not implement `Future` need to be manually supported.
+In a nutshell: ``error[E0599]: no method named `as_future` found for type `your::type::here` in the current scope``
+
+The catch is that Rust doesn't support negative or mutually exclusive trait bounds. Because of this, I needed to make a choice whether to support `Future` types seamlessly and `!Future` types painfully, or `!Future` types seamlessly and `Future` types painfully. I chose the former. This means that types which do not implement `Future` need to be manually supported.
 
 | You're calling sync functions that return... | Then you need to...                                                                                                                                                                                                                                               |
 |----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Types from `std`                             | Do nothing ("std" is a default feature)                                                                                                                                                                                                                           |
 | Types from a third-party crate               |  Check the features list to see whether implicit-await already supports that crate, and if so enable the feature. Otherwise submit an issue requesting support for that crate's types be added.   Rockstars can include a PR to add support along with the issue! |
-| Types from your own crate                    |  Use the as_future! macro to add support in your own code. OR submit a PR to implicit-await to support your crate behind a feature flag.                                                                                                                          |
+| Types from your own crate                    |  Use the as_future! macro to add support in your own code. OR submit a PR to implicit-await to support your crate behind a feature flag.
 
 ## Features
 
