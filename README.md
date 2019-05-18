@@ -133,6 +133,23 @@ The catch is that Rust doesn't support negative or mutually exclusive trait boun
 * Go through all of `std` adding types
 * Come up with a list of other crates to add support for, and do so.
 
+## Dependencies
+
+I strive to limit dependencies where possible. The direct dependencies of the `implicit-await` project are `proc-macro2`, `quote`, and `syn`, all used to implement the `#[implicit_await]` procedural macro. `unicode-xid` is brought in as a transitive dependency.
+
+```
+implicit-await v0.1.0
+└── implicit-await-macro v0.1.0
+    ├── proc-macro2 v0.4.30
+    │   └── unicode-xid v0.1.0
+    ├── quote v0.6.12
+    │   └── proc-macro2 v0.4.30 (*)
+    └── syn v0.15.34
+        ├── proc-macro2 v0.4.30 (*)
+        ├── quote v0.6.12 (*)
+        └── unicode-xid v0.1.0 (*)
+```
+
 ## Acknowledgements
 
 Apparently futures in Kotlin work similarly to this.
