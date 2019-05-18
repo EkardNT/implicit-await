@@ -3,6 +3,7 @@ name = "implicit-await"
 version = "0.1.0"
 authors = ["Drake Tetreault <ekardnt@ekardnt.com>"]
 edition = "2018"
+description = "Implicitly await calls returning Future impls"
 license = "CC0-1.0"
 repository = "https://github.com/EkardNT/implicit-await"
 readme = "README.md"
