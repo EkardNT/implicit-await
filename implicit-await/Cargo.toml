@@ -4,7 +4,6 @@ version = "0.1.0"
 authors = ["Drake Tetreault <ekardnt@ekardnt.com>"]
 edition = "2018"
 license = "CC0-1.0"
-homepage = "https://github.com/EkardNT/implicit-await"
 repository = "https://github.com/EkardNT/implicit-await"
 readme = "README.md"
 keywords = ["async", "await", "implicit"]
